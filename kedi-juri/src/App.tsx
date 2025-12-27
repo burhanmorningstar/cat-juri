@@ -192,20 +192,23 @@ function App() {
         flexDirection: window.innerWidth <= 768 ? "column" : "row",
         gap: window.innerWidth <= 768 ? "10px" : "20px",
         padding: window.innerWidth <= 768 ? "10px" : "20px",
+        height: window.innerWidth <= 768 ? "100vh" : "auto",
         minHeight: "100vh",
         boxSizing: "border-box",
+        overflow: window.innerWidth <= 768 ? "hidden" : "auto",
       }}>
       {/* Sol Taraf: Resim */}
       <div
         style={{
-          flex: window.innerWidth <= 768 ? "none" : 2,
+          flex: window.innerWidth <= 768 ? "0 0 35vh" : 2,
           width: window.innerWidth <= 768 ? "100%" : "auto",
-          minHeight: window.innerWidth <= 768 ? "40vh" : "auto",
+          height: window.innerWidth <= 768 ? "35vh" : "auto",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           background: "#f0f0f0",
           borderRadius: "10px",
+          flexShrink: 0,
         }}>
         <img
           src={currentPhoto.url}
@@ -213,7 +216,7 @@ function App() {
           crossOrigin="anonymous"
           style={{
             maxWidth: "100%",
-            maxHeight: window.innerWidth <= 768 ? "40vh" : "90vh",
+            maxHeight: window.innerWidth <= 768 ? "33vh" : "90vh",
             objectFit: "contain",
             borderRadius: "8px",
           }}
@@ -223,13 +226,15 @@ function App() {
       {/* Sağ Taraf: Puanlama */}
       <div
         style={{
-          flex: window.innerWidth <= 768 ? "none" : 1,
+          flex: window.innerWidth <= 768 ? "1" : 1,
           width: window.innerWidth <= 768 ? "100%" : "auto",
           padding: window.innerWidth <= 768 ? "15px" : "20px",
           background: "#222",
           color: "#fff",
           borderRadius: "10px",
           boxSizing: "border-box",
+          overflow: window.innerWidth <= 768 ? "auto" : "visible",
+          WebkitOverflowScrolling: "touch",
         }}>
         <h2
           style={{
@@ -273,10 +278,12 @@ function App() {
               onChange={(e) =>
                 setScores({ ...scores, [key]: Number.parseInt(e.target.value) })
               }
+              onTouchStart={(e) => e.stopPropagation()}
               style={{
                 width: "100%",
                 cursor: "pointer",
                 height: window.innerWidth <= 768 ? "30px" : "auto",
+                touchAction: "none",
               }}
             />
           </div>

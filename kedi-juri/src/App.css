@@ -20,6 +20,7 @@ body {
 @media (max-width: 768px) {
   body {
     font-size: 14px;
+    touch-action: pan-y;
   }
 
   input[type="range"] {
@@ -27,6 +28,7 @@ body {
     appearance: none;
     height: 30px;
     background: transparent;
+    touch-action: none;
   }
 
   input[type="range"]::-webkit-slider-thumb {
@@ -46,5 +48,24 @@ body {
     cursor: pointer;
     border-radius: 50%;
     border: none;
+  }
+
+  /* Scroll container için stil */
+  div[style*="overflow"] {
+    scrollbar-width: thin;
+    scrollbar-color: #4caf50 #333;
+  }
+
+  div[style*="overflow"]::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  div[style*="overflow"]::-webkit-scrollbar-track {
+    background: #333;
+  }
+
+  div[style*="overflow"]::-webkit-scrollbar-thumb {
+    background: #4caf50;
+    border-radius: 3px;
   }
 }
