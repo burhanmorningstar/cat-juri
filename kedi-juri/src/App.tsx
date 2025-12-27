@@ -148,16 +148,38 @@ function App() {
     link.click();
   };
 
-  if (loading) return <h1>Resim Yükleniyor...</h1>;
+  if (loading)
+    return (
+      <h1
+        style={{
+          padding: "20px",
+          fontSize: window.innerWidth <= 768 ? "18px" : "24px",
+        }}>
+        Resim Yükleniyor...
+      </h1>
+    );
 
   if (!currentPhoto)
     return (
-      <div style={{ textAlign: "center", padding: "50px" }}>
-        <h1>🎉 BİTTİ! Geçmiş olsun kaptan.</h1>
-        <p>Veritabanında etiketlenecek fotoğraf kalmadı.</p>
+      <div
+        style={{
+          textAlign: "center",
+          padding: window.innerWidth <= 768 ? "20px" : "50px",
+        }}>
+        <h1 style={{ fontSize: window.innerWidth <= 768 ? "20px" : "32px" }}>
+          🎉 BİTTİ! Geçmiş olsun kaptan.
+        </h1>
+        <p style={{ fontSize: window.innerWidth <= 768 ? "14px" : "16px" }}>
+          Veritabanında etiketlenecek fotoğraf kalmadı.
+        </p>
         <button
           onClick={downloadCSV}
-          style={{ padding: "20px", fontSize: "20px", cursor: "pointer" }}>
+          style={{
+            padding: window.innerWidth <= 768 ? "15px" : "20px",
+            fontSize: window.innerWidth <= 768 ? "16px" : "20px",
+            cursor: "pointer",
+            touchAction: "manipulation",
+          }}>
           📂 CSV İNDİR
         </button>
       </div>
@@ -167,38 +189,61 @@ function App() {
     <div
       style={{
         display: "flex",
-        gap: "20px",
-        padding: "20px",
-        height: "100vh",
+        flexDirection: window.innerWidth <= 768 ? "column" : "row",
+        gap: window.innerWidth <= 768 ? "10px" : "20px",
+        padding: window.innerWidth <= 768 ? "10px" : "20px",
+        minHeight: "100vh",
+        boxSizing: "border-box",
       }}>
       {/* Sol Taraf: Resim */}
       <div
         style={{
-          flex: 2,
+          flex: window.innerWidth <= 768 ? "none" : 2,
+          width: window.innerWidth <= 768 ? "100%" : "auto",
+          minHeight: window.innerWidth <= 768 ? "40vh" : "auto",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           background: "#f0f0f0",
+          borderRadius: "10px",
         }}>
         <img
           src={currentPhoto.url}
           alt="Kedi"
           crossOrigin="anonymous"
-          style={{ maxWidth: "100%", maxHeight: "90vh", objectFit: "contain" }}
+          style={{
+            maxWidth: "100%",
+            maxHeight: window.innerWidth <= 768 ? "40vh" : "90vh",
+            objectFit: "contain",
+            borderRadius: "8px",
+          }}
         />
       </div>
 
       {/* Sağ Taraf: Puanlama */}
       <div
         style={{
-          flex: 1,
-          padding: "20px",
+          flex: window.innerWidth <= 768 ? "none" : 1,
+          width: window.innerWidth <= 768 ? "100%" : "auto",
+          padding: window.innerWidth <= 768 ? "15px" : "20px",
           background: "#222",
           color: "#fff",
           borderRadius: "10px",
+          boxSizing: "border-box",
         }}>
-        <h2>📸 {currentPhoto.name}</h2>
-        <p>
+        <h2
+          style={{
+            fontSize: window.innerWidth <= 768 ? "16px" : "24px",
+            margin: "0 0 10px 0",
+            wordBreak: "break-all",
+          }}>
+          📸 {currentPhoto.name}
+        </h2>
+        <p
+          style={{
+            fontSize: window.innerWidth <= 768 ? "16px" : "18px",
+            fontWeight: "bold",
+          }}>
           Toplam:{" "}
           <strong>{Object.values(scores).reduce((a, b) => a + b, 0)}</strong> /
           100
@@ -206,12 +251,17 @@ function App() {
         <hr />
 
         {(Object.keys(scores) as Array<keyof Scores>).map((key) => (
-          <div key={key} style={{ marginBottom: "20px" }}>
+          <div
+            key={key}
+            style={{
+              marginBottom: window.innerWidth <= 768 ? "15px" : "20px",
+            }}>
             <label
               style={{
                 display: "block",
                 textTransform: "capitalize",
                 marginBottom: "5px",
+                fontSize: window.innerWidth <= 768 ? "14px" : "16px",
               }}>
               {key}: <strong>{scores[key]}</strong>
             </label>
@@ -223,7 +273,11 @@ function App() {
               onChange={(e) =>
                 setScores({ ...scores, [key]: Number.parseInt(e.target.value) })
               }
-              style={{ width: "100%", cursor: "pointer" }}
+              style={{
+                width: "100%",
+                cursor: "pointer",
+                height: window.innerWidth <= 768 ? "30px" : "auto",
+              }}
             />
           </div>
         ))}
@@ -232,27 +286,36 @@ function App() {
           onClick={handleSave}
           style={{
             width: "100%",
-            padding: "15px",
+            padding: window.innerWidth <= 768 ? "18px" : "15px",
             background: "#4CAF50",
             color: "white",
             border: "none",
             borderRadius: "5px",
-            fontSize: "18px",
+            fontSize: window.innerWidth <= 768 ? "16px" : "18px",
             cursor: "pointer",
-            marginTop: "20px",
+            marginTop: window.innerWidth <= 768 ? "15px" : "20px",
+            fontWeight: "bold",
+            touchAction: "manipulation",
           }}>
           ✅ KAYDET & SIRADAKİ
         </button>
 
-        <div style={{ marginTop: "50px", fontSize: "12px", color: "#aaa" }}>
+        <div
+          style={{
+            marginTop: window.innerWidth <= 768 ? "20px" : "50px",
+            fontSize: window.innerWidth <= 768 ? "11px" : "12px",
+            color: "#aaa",
+          }}>
           <button
             onClick={downloadCSV}
             style={{
               background: "transparent",
               border: "1px solid #aaa",
               color: "#aaa",
-              padding: "5px",
+              padding: window.innerWidth <= 768 ? "8px 12px" : "5px",
               cursor: "pointer",
+              fontSize: window.innerWidth <= 768 ? "12px" : "inherit",
+              touchAction: "manipulation",
             }}>
             Ara Rapor Al (CSV)
           </button>
