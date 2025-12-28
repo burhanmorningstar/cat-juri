@@ -51,7 +51,7 @@ function App() {
       const q = query(
         collection(db, "photos"),
         where("status", "==", "pending"),
-        limit(50)
+        limit(5)
       );
 
       const querySnapshot = await getDocs(q);
